@@ -8,35 +8,35 @@
 library(fueleconomy)
 
 # Install and load the "dplyr" library
-
+library("dplyr")
 
 # Select the different manufacturers (makes) of the cars in this data set. 
 # Save this vector in a variable
-
+makes <- select(vehicles, make)
 
 # Use the `distinct()` function to determine how many different car manufacturers
 # are represented by the data set
-
+diff_makes <- distinct(makes)
 
 # Filter the data set for vehicles manufactured in 1997
-
+makes1997 <- filter(vehicles, year == 1997)
 
 # Arrange the 1997 cars by highway (`hwy`) gas milage
-
+order_by_miles <- arrange(vehicles, hwy)
 
 # Mutate the 1997 cars data frame to add a column `average` that has the average
 # gas milage (between city and highway mpg) for each car
-
+avg1997mpg <- mutate(vehicles, average_mpg = (hwy + cty) / 2)
 
 # Filter the whole vehicles data set for 2-Wheel Drive vehicles that get more
 # than 20 miles/gallon in the city. 
 # Save this new data frame in a variable.
-
+two_wheel_20_mpg <- filter(vehicles, drive == '2-Wheel Drive', cty > 20)
 
 # Of the above vehicles, what is the vehicle ID of the vehicle with the worst 
 # hwy mpg?
 # Hint: filter for the worst vehicle, then select its ID.
-
+worst_hwy_mpg <- select(filter(vehicles, hwy == min(hwy), id))
 
 # Write a function that takes a `year_choice` and a `make_choice` as parameters,
 # and returns the vehicle model that gets the most hwy miles/gallon of vehicles 
